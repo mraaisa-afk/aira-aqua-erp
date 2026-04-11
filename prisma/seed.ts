@@ -3,6 +3,13 @@ import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
+type CoaItem = {
+  code: string
+  name: string
+  type: AccType
+  parentId?: string | null
+}
+
 async function main() {
   console.log('Seeding database...')
 
@@ -41,7 +48,7 @@ async function main() {
   }
 
   // Chart of Accounts
-  const coa = [
+  const coa: CoaItem[] = [
     { code: '1000', name: 'সম্পদ (Assets)', type: AccType.ASSET, parentId: null },
     { code: '1100', name: 'নগদ ও ব্যাংক', type: AccType.ASSET },
     { code: '1101', name: 'নগদ তহবিল', type: AccType.ASSET },
@@ -69,13 +76,13 @@ async function main() {
 
   // Insert root accounts first, then children
   const roots = coa.filter(a => a.parentId === null)
-  const children = coa.filter(a => a.parentId !== null && a.parentId !== undefined)
+  const children = coa.filter(a => a.parentId === undefined)
   for (const a of roots) {
     await prisma.accountHead.upsert({ where: { code: a.code }, update: {}, create: { code: a.code, name: a.name, type: a.type } })
   }
   // Assign parents by code prefix
   for (const a of children) {
-    const parentCode = a.code.slice(0,1) + '000'
+    const parentCode = a.code.slice(0, 1) + '000'
     const parent = await prisma.accountHead.findUnique({ where: { code: parentCode } })
     await prisma.accountHead.upsert({
       where: { code: a.code },
