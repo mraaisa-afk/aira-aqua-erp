@@ -23,14 +23,6 @@ export interface PaginatedResult<T> {
   totalPages: number
 }
 
-export interface KPICard {
-  title: string
-  value: string | number
-  change?: number
-  icon: string
-  color: string
-}
-
 export const ROLE_LABELS: Record<UserRole, string> = {
   SUPER_ADMIN: 'সুপার অ্যাডমিন',
   ADMIN: 'অ্যাডমিন',
@@ -39,6 +31,29 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   ACCOUNTS_OFFICER: 'হিসাব কর্মকর্তা',
   SALES_OFFICER: 'বিক্রয় কর্মকর্তা',
   AUDITOR: 'অডিটর',
+}
+
+export const STATUS_LABELS: Record<string, string> = {
+  DRAFT: 'খসড়া',
+  SENT: 'পাঠানো হয়েছে',
+  PARTIALLY_RECEIVED: 'আংশিক প্রাপ্ত',
+  FULLY_RECEIVED: 'সম্পূর্ণ প্রাপ্ত',
+  CANCELLED: 'বাতিল',
+  PENDING_APPROVAL: 'অনুমোদনের অপেক্ষায়',
+  APPROVED: 'অনুমোদিত',
+  REJECTED: 'প্রত্যাখ্যাত',
+  UNPAID: 'অপরিশোধিত',
+  PARTIALLY_PAID: 'আংশিক পরিশোধিত',
+  PAID: 'পরিশোধিত',
+  ISSUED: 'ইস্যু করা হয়েছে',
+  PARTIALLY_COLLECTED: 'আংশিক সংগ্রহ',
+  COLLECTED: 'সংগ্রহ সম্পন্ন',
+  POSTED: 'পোস্ট করা হয়েছে',
+  PLANNED: 'পরিকল্পিত',
+  IN_PROGRESS: 'চলমান',
+  COMPLETED: 'সম্পন্ন',
+  CONFIRMED: 'নিশ্চিত',
+  INVOICED: 'ইনভয়েস হয়েছে',
 }
 
 export const NAV_ITEMS = [
