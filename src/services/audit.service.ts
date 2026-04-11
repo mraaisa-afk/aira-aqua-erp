@@ -1,5 +1,6 @@
 import { db } from '@/lib/db'
 import type { AuditAction } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 export interface AuditParams {
   userId: string
@@ -18,8 +19,8 @@ export async function createAuditLog(params: AuditParams): Promise<void> {
       action:    params.action,
       module:    params.module,
       recordId:  params.recordId,
-      oldValue:  params.oldValue ?? undefined,
-      newValue:  params.newValue ?? undefined,
+      oldValue:  (params.oldValue ?? undefined) as Prisma.InputJsonValue | undefined,
+      newValue:  (params.newValue ?? undefined) as Prisma.InputJsonValue | undefined,
       reference: params.reference,
     },
   })

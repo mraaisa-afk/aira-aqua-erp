@@ -1,6 +1,6 @@
-import type { UserRole } from '@prisma/client'
+import type { UserRole, VoucherType, AccType, AuditAction, PRStatus, POStatus, BillStatus, JobStatus, SOStatus, InvStatus, VoucherStat } from '@prisma/client'
 
-export type { UserRole }
+export type { UserRole, VoucherType, AccType, AuditAction, PRStatus, POStatus, BillStatus, JobStatus, SOStatus, InvStatus, VoucherStat }
 
 export interface SessionUser {
   id: string

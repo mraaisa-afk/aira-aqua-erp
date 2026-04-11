@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/header'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
-  if (!session) redirect('/login')
+  if (!session?.user) redirect('/login')
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">
       <Sidebar />
