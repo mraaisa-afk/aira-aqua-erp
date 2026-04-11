@@ -69,7 +69,7 @@ async function main() {
 
   // Insert root accounts first, then children
   const roots = coa.filter(a => a.parentId === null)
-  const children = coa.filter(a => a.parentId !== false && a.parentId !== null)
+  const children = coa.filter(a => a.parentId !== null && a.parentId !== undefined)
   for (const a of roots) {
     await prisma.accountHead.upsert({ where: { code: a.code }, update: {}, create: { code: a.code, name: a.name, type: a.type } })
   }
