@@ -1,0 +1,28 @@
+{
+  "common": {
+    "appName": "আইরা ইআরপি",
+    "save": "সংরক্ষণ",
+    "cancel": "বাতিল",
+    "delete": "মুছুন",
+    "edit": "সম্পাদনা",
+    "create": "তৈরি করুন",
+    "search": "অনুসন্ধান",
+    "loading": "লোড হচ্ছে...",
+    "noData": "কোনো তথ্য নেই",
+    "confirm": "নিশ্চিত করুন",
+    "back": "পিছনে"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "procurement": "ক্রয়",
+    "inventory": "ইনভেন্টরি",
+    "processing": "প্রক্রিয়াকরণ",
+    "sales": "বিক্রয়",
+    "accounting": "হিসাবরক্ষণ",
+    "reports": "প্রতিবেদন",
+    "masterData": "মাস্টার ডেটা",
+    "users": "ব্যবহারকারী",
+    "settings": "সেটিংস",
+    "notifications": "বিজ্ঞপ্তি"
+  }
+}
