@@ -733,3 +733,22 @@ model ExpenseClaim {
   category    ExpenseCategory @relation(fields: [categoryId], references: [id])
   @@map("expense_claims")
 }
+
+model CompanySetting {
+  id                   String   @id @default(cuid())
+  companyName          String   @default("Aira Aqua")
+  legalName            String?
+  binNumber            String?
+  tin                  String?
+  vatRegNo             String?
+  address              String?
+  phone                String?
+  email                String?
+  website              String?
+  logoUrl              String?
+  baseCurrency         String   @default("BDT")
+  fiscalYearStartMonth Int      @default(7)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  @@map("company_settings")
+}
