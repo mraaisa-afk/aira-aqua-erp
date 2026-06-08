@@ -146,3 +146,38 @@ model BankTransaction {
   account       BankAccount     @relation(fields: [accountId], references: [id])
   @@map("bank_transactions")
 }
+
+enum ExpenseStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  REJECTED
+  PAID
+}
+
+model ExpenseCategory {
+  id        String         @id @default(cuid())
+  name      String         @unique
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  claims    ExpenseClaim[]
+  @@map("expense_categories")
+}
+
+model ExpenseClaim {
+  id          String          @id @default(cuid())
+  claimNumber String          @unique
+  categoryId  String
+  amount      Decimal         @db.Decimal(18,2)
+  date        DateTime        @default(now())
+  description String?
+  status      ExpenseStatus   @default(DRAFT)
+  claimedBy   String
+  approvedBy  String?
+  approvedAt  DateTime?
+  receiptUrl  String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  category    ExpenseCategory @relation(fields: [categoryId], references: [id])
+  @@map("expense_claims")
+}
