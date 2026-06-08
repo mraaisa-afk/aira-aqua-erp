@@ -94,3 +94,43 @@ export async function recordCollection(params: {
     return collection
   })
 }
+
+export async function createShipment(params: {
+  invoiceId: string
+  notes?: string
+  userId: string
+  containerNo?: string
+  sealNo?: string
+  vesselName?: string
+  voyageNo?: string
+  portOfLoading?: string
+  portOfDischarge?: string
+  finalDestination?: string
+  billOfLadingNo?: string
+  grossWeight?: number
+  netWeight?: number
+}) {
+  const count = await db.shipment.count()
+  const shipmentNo = generateNumber('SHP', count + 1)
+  const shipment = await db.shipment.create({
+    data: {
+      shipmentNo,
+      invoiceId:        params.invoiceId,
+      notes:            params.notes,
+      shippedBy:        params.userId,
+      containerNo:      params.containerNo,
+      sealNo:           params.sealNo,
+      vesselName:       params.vesselName,
+      voyageNo:         params.voyageNo,
+      portOfLoading:    params.portOfLoading,
+      portOfDischarge:  params.portOfDischarge,
+      finalDestination: params.finalDestination,
+      billOfLadingNo:   params.billOfLadingNo,
+      grossWeight:      params.grossWeight,
+      netWeight:        params.netWeight,
+    },
+  })
+  await db.invoice.update({ where: { id: params.invoiceId }, data: { status: 'SHIPPED' } })
+  await createAuditLog({ userId: params.userId, action: 'CREATE', module: 'SALES', recordId: shipment.id, reference: shipmentNo })
+  return shipment
+}
