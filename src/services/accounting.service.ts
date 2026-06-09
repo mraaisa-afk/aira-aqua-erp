@@ -87,3 +87,66 @@ export async function getTrialBalance(fromDate: Date, toDate: Date) {
   }
   return Array.from(map.values()).sort((a, b) => a.code.localeCompare(b.code))
 }
+
+// Bangladesh VAT Calculation (Standard rate: 15%)
+export function calculateVAT(amount: number, rate: number = 15): number {
+  return (amount * rate) / 100
+}
+
+// Get outstanding receivables
+export async function getOutstandingReceivables(customerId?: string) {
+  return await db.accountsReceivable.findMany({
+    where: {
+      status: 'OUTSTANDING',
+      ...(customerId && { customerId }),
+    },
+    include: {
+      customer: true,
+      invoice: true,
+    },
+    orderBy: {
+      dueDate: 'asc',
+    },
+  })
+}
+
+// Get outstanding payables
+export async function getOutstandingPayables(supplierId?: string) {
+  return await db.accountsPayable.findMany({
+    where: {
+      status: 'OUTSTANDING',
+      ...(supplierId && { supplierId }),
+    },
+    include: {
+      supplier: true,
+      bill: true,
+    },
+    orderBy: {
+      dueDate: 'asc',
+    },
+  })
+}
+
+// Get general ledger balance for an account
+export async function getAccountBalance(accountHeadId: string) {
+  return await db.generalLedger.findUnique({
+    where: { accountHeadId },
+    include: {
+      accountHead: true,
+    },
+  })
+}
+
+// Get all general ledger balances
+export async function getGeneralLedger() {
+  return await db.generalLedger.findMany({
+    include: {
+      accountHead: true,
+    },
+    orderBy: {
+      accountHead: {
+        code: 'asc',
+      },
+    },
+  })
+}
