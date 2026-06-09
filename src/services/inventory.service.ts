@@ -84,3 +84,122 @@ export async function transferStock(params: {
     })
   })
 }
+
+// Advanced Inventory Valuation Methods
+
+export async function getInventoryValuationFIFO() {
+  const stocks = await db.stock.findMany({
+    include: {
+      product: true,
+      warehouse: true,
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+  })
+
+  let totalValue = 0
+  const valuationDetails = stocks.map((stock) => {
+    const value = Number(stock.quantity) * Number(stock.product.costPrice)
+    totalValue += value
+    return {
+      productId: stock.productId,
+      productName: stock.product.name,
+      warehouseId: stock.warehouseId,
+      warehouseName: stock.warehouse.name,
+      quantity: Number(stock.quantity),
+      unitCost: Number(stock.product.costPrice),
+      value,
+      batchNo: stock.batchNo,
+      expiryDate: stock.expiryDate,
+    }
+  })
+
+  return {
+    method: 'FIFO',
+    totalValue,
+    details: valuationDetails,
+  }
+}
+
+export async function getInventoryValuationWeightedAverage() {
+  const stocks = await db.stock.findMany({
+    include: {
+      product: true,
+      warehouse: true,
+    },
+  })
+
+  const productGroups = new Map<string, Array<{ quantity: number; cost: number }>>()
+  stocks.forEach((stock) => {
+    const key = stock.productId
+    if (!productGroups.has(key)) {
+      productGroups.set(key, [])
+    }
+    productGroups.get(key)!.push({
+      quantity: Number(stock.quantity),
+      cost: Number(stock.product.costPrice),
+    })
+  })
+
+  let totalValue = 0
+  const valuationDetails: any[] = []
+  productGroups.forEach((items, productId) => {
+    const totalQty = items.reduce((sum, i) => sum + i.quantity, 0)
+    const totalCost = items.reduce((sum, i) => sum + i.quantity * i.cost, 0)
+    const weightedAvgCost = totalQty > 0 ? totalCost / totalQty : 0
+    const value = totalQty * weightedAvgCost
+    totalValue += value
+
+    const product = stocks.find((s) => s.productId === productId)?.product
+    valuationDetails.push({
+      productId,
+      productName: product?.name,
+      quantity: totalQty,
+      weightedAverageCost: weightedAvgCost,
+      value,
+    })
+  })
+
+  return {
+    method: 'WEIGHTED_AVERAGE',
+    totalValue,
+    details: valuationDetails,
+  }
+}
+
+export async function getExpiringStockReport(daysFromNow: number = 30) {
+  const futureDate = new Date()
+  futureDate.setDate(futureDate.getDate() + daysFromNow)
+
+  const expiringStocks = await db.stock.findMany({
+    where: {
+      expiryDate: {
+        lte: futureDate,
+        gte: new Date(),
+      },
+    },
+    include: {
+      product: true,
+      warehouse: true,
+    },
+    orderBy: {
+      expiryDate: 'asc',
+    },
+  })
+
+  return {
+    daysFromNow,
+    count: expiringStocks.length,
+    stocks: expiringStocks.map((s) => ({
+      productId: s.productId,
+      productName: s.product.name,
+      warehouseName: s.warehouse.name,
+      quantity: Number(s.quantity),
+      expiryDate: s.expiryDate,
+      daysUntilExpiry: Math.ceil(
+        (s.expiryDate!.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+      ),
+    })),
+  }
+}
