@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "আইরা অ্যাকোয়া ইআরপি",
+    "dashboard": "ড্যাশবোর্ড",
+    "logout": "লগআউট",
+    "login": "লগইন",
+    "unauthorized": "অনুমতি নেই",
+    "forbidden": "নিষিদ্ধ",
+    "notFound": "পাওয়া যায়নি",
+    "error": "ত্রুটি",
+    "success": "সফল",
+    "loading": "লোড হচ্ছে...",
+    "save": "সংরক্ষণ করুন",
+    "cancel": "বাতিল করুন",
+    "delete": "মুছুন",
+    "edit": "সম্পাদনা করুন",
+    "create": "তৈরি করুন",
+    "back": "ফিরে যান",
+    "next": "পরবর্তী",
+    "previous": "পূর্ববর্তী",
+    "search": "অনুসন্ধান",
+    "filter": "ফিল্টার",
+    "export": "রপ্তানি করুন",
+    "import": "আমদানি করুন",
+    "print": "প্রিন্ট করুন",
+    "download": "ডাউনলোড করুন",
+    "upload": "আপলোড করুন"
+  },
+  "navigation": {
+    "dashboard": "ড্যাশবোর্ড",
+    "masterData": "মাস্টার ডেটা",
+    "procurement": "ক্রয় ব্যবস্থাপনা",
+    "inventory": "মজুদ ব্যবস্থাপনা",
+    "processing": "প্রক্রিয়াকরণ",
+    "sales": "বিক্রয় ও ডেলিভারি",
+    "accounting": "হিসাব ও অর্থ",
+    "reports": "রিপোর্ট",
+    "notifications": "বিজ্ঞপ্তি",
+    "users": "ব্যবহারকারী",
+    "settings": "সেটিংস"
+  },
+  "modules": {
+    "procurement": {
+      "title": "ক্রয় ব্যবস্থাপনা",
+      "purchaseRequisition": "ক্রয় প্রস্তাব",
+      "purchaseOrder": "ক্রয় আদেশ",
+      "goodsReceipt": "পণ্য গ্রহণ",
+      "supplier": "সরবরাহকারী",
+      "supplierBill": "সরবরাহকারী বিল",
+      "supplierPayment": "সরবরাহকারী পেমেন্ট"
+    },
+    "inventory": {
+      "title": "মজুদ ব্যবস্থাপনা",
+      "product": "পণ্য",
+      "warehouse": "গুদাম",
+      "stock": "মজুদ",
+      "stockAdjustment": "মজুদ সমন্বয়",
+      "stockTransfer": "মজুদ স্থানান্তর",
+      "category": "বিভাগ",
+      "unit": "পরিমাপের একক"
+    },
+    "processing": {
+      "title": "প্রক্রিয়াকরণ",
+      "processingJob": "প্রক্রিয়াকরণ কাজ",
+      "jobInput": "কাজের ইনপুট",
+      "jobOutput": "কাজের আউটপুট"
+    },
+    "sales": {
+      "title": "বিক্রয় ও ডেলিভারি",
+      "salesOrder": "বিক্রয় আদেশ",
+      "invoice": "চালান",
+      "collection": "সংগ্রহ",
+      "shipment": "পাঠানো",
+      "customer": "গ্রাহক"
+    },
+    "accounting": {
+      "title": "হিসাব ও অর্থ",
+      "chartOfAccounts": "অ্যাকাউন্ট চার্ট",
+      "voucher": "ভাউচার",
+      "journalEntry": "জার্নাল এন্ট্রি",
+      "bankAccount": "ব্যাংক অ্যাকাউন্ট",
+      "bankTransaction": "ব্যাংক লেনদেন",
+      "expenseCategory": "খরচ বিভাগ",
+      "expenseClaim": "খরচ দাবি"
+    },
+    "hr": {
+      "title": "মানব সম্পদ",
+      "employee": "কর্মচারী",
+      "attendance": "উপস্থিতি",
+      "payroll": "বেতন পরিশোধ",
+      "salarySlip": "বেতন স্লিপ"
+    }
+  },
+  "fields": {
+    "id": "আইডি",
+    "name": "নাম",
+    "email": "ইমেইল",
+    "phone": "ফোন",
+    "address": "ঠিকানা",
+    "status": "অবস্থা",
+    "createdAt": "তৈরি হয়েছে",
+    "updatedAt": "আপডেট হয়েছে",
+    "amount": "পরিমাণ",
+    "quantity": "পরিমাণ",
+    "price": "মূল্য",
+    "date": "তারিখ",
+    "description": "বর্ণনা",
+    "notes": "নোট",
+    "reference": "রেফারেন্স",
+    "total": "মোট",
+    "balance": "ব্যালেন্স",
+    "dueDate": "নির্ধারিত তারিখ",
+    "isActive": "সক্রিয়"
+  },
+  "messages": {
+    "confirmDelete": "আপনি কি এই রেকর্ডটি মুছতে নিশ্চিত?",
+    "deletedSuccessfully": "রেকর্ড সফলভাবে মুছা হয়েছে",
+    "savedSuccessfully": "রেকর্ড সফলভাবে সংরক্ষিত হয়েছে",
+    "updatedSuccessfully": "রেকর্ড সফলভাবে আপডেট হয়েছে",
+    "createdSuccessfully": "রেকর্ড সফলভাবে তৈরি হয়েছে",
+    "errorOccurred": "একটি ত্রুটি ঘটেছে",
+    "noRecordsFound": "কোন রেকর্ড পাওয়া যায়নি",
+    "loadingData": "ডেটা লোড হচ্ছে...",
+    "pleaseWait": "অনুগ্রহ করে অপেক্ষা করুন..."
+  }
+}
