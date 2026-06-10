@@ -50,5 +50,5 @@
 
 @layer base {
   * { @apply border-border; }
-  body { @apply bg-background text-foreground; font-family: 'Hind Siliguri', sans-serif; }
+  body { @apply bg-background text-foreground; }
 }
